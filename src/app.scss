@@ -1,0 +1,24 @@
+$font-stack: Roboto, sans-serif;
+
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$lightGrey: rgb(239, 246, 249);
+$grey: rgb(204, 204, 204);
+$darkgrey: rgb(170, 170, 170);
+$cherry: rgb(255, 69, 69);
+$lightPink: rgb(255, 162, 162);
+
+* {
+  font-family: $font-stack;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  // background: linear-gradient(to bottom, $black, $darkgrey);
+  background: $lightGrey;
+  color: $black;
+}
