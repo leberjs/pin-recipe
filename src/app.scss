@@ -22,3 +22,27 @@ body {
   background: $lightGrey;
   color: $black;
 }
+
+/* Modifiers */
+.marginT60 {
+  margin-top: 60px;
+}
+
+.marginB15 {
+  margin-bottom: 15px;
+}
+
+.marginR10 {
+  margin-right: 10px;
+}
+
+.colorRed {
+  color: $cherry;
+}
+
+/* Home */
+.layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

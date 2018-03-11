@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000
 
 module.exports = {
   mode: 'development',
-  entry: ['react-hot-loader/patch', './src/index.js'],
+  entry: ['babel-polyfill', 'react-hot-loader/patch', './src/index.js'],
   output: {
     filename: 'app.[hash].js',
     publicPath: '/'
@@ -45,6 +45,7 @@ module.exports = {
 
   devServer: {
     host: 'localhost',
+    https: true,
     port: port,
     historyApiFallback: true,
     open: true,
