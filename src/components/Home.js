@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { sortBoards, sortPins } from '../utils/sort'
+
 class Home extends React.Component {
   constructor() {
     super()
@@ -8,25 +10,23 @@ class Home extends React.Component {
     this.showPins = this.showPins.bind(this)
 
     this.state = {
-      boards: [],
-      pins: []
+      boards: {}
     }
   }
 
   handleOnClick() {
     PDK.login({ scope: 'read_public' }, res => {
       PDK.me('boards', res => {
-        console.log(res)
-        this.setState({ boards: res.data })
+        this.setState({ boards: sortBoards(res.data) })
       })
     })
   }
 
   showPins(id) {
-    console.log('test')
     PDK.request(`boards/${id}/pins`, res => {
-      console.log(res)
-      this.setState({ pins: res.data })
+      const boards = { ...this.state.boards }
+      boards[id].pins = res.data
+      this.setState({ boards })
     })
   }
 
@@ -38,21 +38,23 @@ class Home extends React.Component {
         </div>
         <div className="marginT60">
           <ul>
-            {this.state.boards
-              ? this.state.boards.map((board, i) => {
+            {Object.keys(this.state.boards)
+              ? Object.keys(this.state.boards).map((key, i) => {
                   return (
                     <li
                       key={i}
                       className="marginB15"
-                      onClick={e => this.showPins(board.id)}
+                      onClick={e => this.showPins(key)}
                     >
-                      {board.name.toUpperCase()}
+                      {this.state.boards[key].name.toUpperCase()}
                       <ul>
-                        {this.state.pins
-                          ? this.state.pins.map((pin, i) => {
+                        {this.state.boards[key].pins
+                          ? this.state.boards[key].pins.map((pin, i) => {
                               return (
                                 <li key={i} className="marginR10 colorRed">
-                                  {pin.note}
+                                  <a href={pin.link} target="_blank">
+                                    {pin.note}
+                                  </a>
                                 </li>
                               )
                             })

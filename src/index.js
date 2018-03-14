@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 
 require('./app.scss')
-require('./utils/pinSDK')
+require('./api/PDK')
 
 ReactDOM.render(<App />, document.getElementById('root'))
